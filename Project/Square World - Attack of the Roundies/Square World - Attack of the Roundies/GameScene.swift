@@ -50,30 +50,45 @@ class GameScene: SKScene {
         view.addGestureRecognizer(swipeDown)
     }
     
+    var moving:Bool = false
+    var moveTimer:Double = 50
+    
     let right = SKAction.moveBy(x: 400, y: 0, duration: 0.6)
     let left = SKAction.moveBy(x: -400, y: 0, duration: 0.6)
     let up = SKAction.moveBy(x: 0, y: 400, duration: 0.6)
     let down = SKAction.moveBy(x: 0, y: -400, duration: 0.6)
     
+
+        //move right
+        @objc func swipeRight (sender:UISwipeGestureRecognizer){
+            if moving == false {
+                player?.run(right)
+                moving = true
+            }
+        }
+        //move left
+        @objc func swipeLeft (sender:UISwipeGestureRecognizer){
+            if moving == false{
+                player?.run(left)
+                moving = true
+            }
+        }
+        //move up
+        @objc func swipeUp (sender:UISwipeGestureRecognizer){
+            if moving == false{
+                player?.run(up)
+                moving = true
+            }
+        }
+        //move down
+        @objc func swipeDown (sender:UISwipeGestureRecognizer){
+            if moving == false{
+                player?.run(down)
+                moving = true
+            }
+        }
     
-    //swipe to move
-    @objc func swipeRight (sender:UISwipeGestureRecognizer){
-        player?.run(right)
-    }
-    
-    //swipe to move
-    @objc func swipeLeft (sender:UISwipeGestureRecognizer){
-        player?.run(left)
-    }
-    
-    @objc func swipeUp (sender:UISwipeGestureRecognizer){
-        player?.run(up)
-    }
-    
-    @objc func swipeDown (sender:UISwipeGestureRecognizer){
-        player?.run(down)
-    }
-    
+
     
     func touchDown(atPoint pos : CGPoint) {
 
@@ -106,6 +121,15 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
+        //set timer to move again, temporary
+        if moving{
+            moveTimer -= 0.4
+            if moveTimer <= 0{
+                moving = false
+                moveTimer = 50
+            }
+        }
         
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
