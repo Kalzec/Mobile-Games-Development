@@ -17,11 +17,13 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     
     private var player : SKSpriteNode?
+    private var enemy : SKSpriteNode?
     
     override func sceneDidLoad() {
 
         //create the player
         self.player = self.childNode(withName: "//squareBoy") as? SKSpriteNode
+        self.enemy = self.childNode(withName: "//roundie") as? SKSpriteNode
         
         self.lastUpdateTime = 0
         
@@ -48,45 +50,119 @@ class GameScene: SKScene {
                                                action: #selector(GameScene.swipeDown(sender:)))
         swipeDown.direction = .down
         view.addGestureRecognizer(swipeDown)
+        
+        physicsWorld.gravity = .zero
+        physicsWorld.contactDelegate = self
+        
+
     }
     
-    var moving:Bool = false
-    var moveTimer:Double = 50
+    var moving:Bool = false //bool to check if current player or enemy is moving
+    var playerTurn:Bool = true //bool to check if it is players turn to move
+    var moveTimer:Double = 15 //
     
-    let right = SKAction.moveBy(x: 1920, y: 0, duration: 0.6)
-    let left = SKAction.moveBy(x: -1920, y: 0, duration: 0.6)
-    let up = SKAction.moveBy(x: 0, y: 1080, duration: 0.6)
-    let down = SKAction.moveBy(x: 0, y: -1080, duration: 0.6)
+    let right = SKAction.moveBy(x: 1920, y: 0, duration: 1)
+    let left = SKAction.moveBy(x: -1920, y: 0, duration: 1)
+    let up = SKAction.moveBy(x: 0, y: 1080, duration: 1)
+    let down = SKAction.moveBy(x: 0, y: -1080, duration: 1)
     
-
         //move right
         @objc func swipeRight (sender:UISwipeGestureRecognizer){
-            if moving == false {
-                player?.run(right)
-                moving = true
+            if playerTurn == true{
+                if moving == false {
+                    player?.run(right)
+                    moving = true
+                    playerTurn = false
+                    
+                    player?.physicsBody?.isDynamic = true
+                    enemy?.physicsBody?.isDynamic = false
+                }
+            }
+            
+            if playerTurn == false{
+                if moving == false{
+                    enemy?.run(right)
+                    moving = true
+                    playerTurn = true
+                    
+                    player?.physicsBody?.isDynamic = false
+                    enemy?.physicsBody?.isDynamic = true
+                }
             }
         }
         //move left
         @objc func swipeLeft (sender:UISwipeGestureRecognizer){
-            if moving == false{
-                player?.run(left)
-                moving = true
+            if playerTurn == true{
+                if moving == false{
+                    player?.run(left)
+                    moving = true
+                    playerTurn = false
+
+                    player?.physicsBody?.isDynamic = true
+                    enemy?.physicsBody?.isDynamic = false
+                }
+            }
+            
+            if playerTurn == false{
+                if moving == false{
+                    enemy?.run(left)
+                    moving = true
+                    playerTurn = true
+                    
+                    player?.physicsBody?.isDynamic = false
+                    enemy?.physicsBody?.isDynamic = true
+                }
             }
         }
         //move up
         @objc func swipeUp (sender:UISwipeGestureRecognizer){
-            if moving == false{
-                player?.run(up)
-                moving = true
+            if playerTurn == true{
+                if moving == false{
+                    player?.run(up)
+                    moving = true
+                    playerTurn = false
+                    
+                    player?.physicsBody?.isDynamic = true
+                    enemy?.physicsBody?.isDynamic = false
+                }
+            }
+            
+            if playerTurn == false{
+                if moving == false{
+                    enemy?.run(up)
+                    moving = true
+                    playerTurn = true
+                    
+                    player?.physicsBody?.isDynamic = false
+                    enemy?.physicsBody?.isDynamic = true
+                }
             }
         }
         //move down
         @objc func swipeDown (sender:UISwipeGestureRecognizer){
-            if moving == false{
-                player?.run(down)
-                moving = true
+            if playerTurn == true{
+                if moving == false{
+                    player?.run(down)
+                    moving = true
+                    playerTurn = false
+                    
+                    player?.physicsBody?.isDynamic = true
+                    enemy?.physicsBody?.isDynamic = false
+                }
+            }
+            
+            if playerTurn == false{
+                if moving == false{
+                    enemy?.run(down)
+                    moving = true
+                    playerTurn = true
+                    
+                    player?.physicsBody?.isDynamic = false
+                    enemy?.physicsBody?.isDynamic = true
+                }
             }
         }
+
     
 
     
@@ -147,3 +223,8 @@ class GameScene: SKScene {
         self.lastUpdateTime = currentTime
     }
 }
+
+extension GameScene: SKPhysicsContactDelegate {
+    
+}
+
