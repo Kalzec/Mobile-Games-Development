@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07366AA323796D12002AAE6E /* Maze Outside Wall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 07366AA223796D12002AAE6E /* Maze Outside Wall.sks */; };
 		07D54202235DC26400597B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D54201235DC26400597B9A /* AppDelegate.swift */; };
 		07D54204235DC26400597B9A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 07D54203235DC26400597B9A /* GameScene.sks */; };
 		07D54206235DC26400597B9A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 07D54205235DC26400597B9A /* Actions.sks */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07366AA223796D12002AAE6E /* Maze Outside Wall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Maze Outside Wall.sks"; sourceTree = "<group>"; };
 		07D541FE235DC26400597B9A /* Square World - Attack of the Roundies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square World - Attack of the Roundies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D54201235DC26400597B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07D54203235DC26400597B9A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				07D5420E235DC26400597B9A /* Assets.xcassets */,
 				07D54210235DC26400597B9A /* LaunchScreen.storyboard */,
 				07D54213235DC26400597B9A /* Info.plist */,
+				07366AA223796D12002AAE6E /* Maze Outside Wall.sks */,
 			);
 			path = "Square World - Attack of the Roundies";
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 				07D54204235DC26400597B9A /* GameScene.sks in Resources */,
 				07D5420F235DC26400597B9A /* Assets.xcassets in Resources */,
 				07D54212235DC26400597B9A /* LaunchScreen.storyboard in Resources */,
+				07366AA323796D12002AAE6E /* Maze Outside Wall.sks in Resources */,
 				07D54206235DC26400597B9A /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
