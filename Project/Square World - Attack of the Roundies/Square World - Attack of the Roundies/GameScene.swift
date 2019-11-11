@@ -53,10 +53,10 @@ class GameScene: SKScene {
     var moving:Bool = false
     var moveTimer:Double = 50
     
-    let right = SKAction.moveBy(x: 400, y: 0, duration: 0.6)
-    let left = SKAction.moveBy(x: -400, y: 0, duration: 0.6)
-    let up = SKAction.moveBy(x: 0, y: 400, duration: 0.6)
-    let down = SKAction.moveBy(x: 0, y: -400, duration: 0.6)
+    let right = SKAction.moveBy(x: 1920, y: 0, duration: 0.6)
+    let left = SKAction.moveBy(x: -1920, y: 0, duration: 0.6)
+    let up = SKAction.moveBy(x: 0, y: 1080, duration: 0.6)
+    let down = SKAction.moveBy(x: 0, y: -1080, duration: 0.6)
     
 
         //move right
