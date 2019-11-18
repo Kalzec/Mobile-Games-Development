@@ -33,7 +33,7 @@ class GameScene: SKScene {
         var enemyX:CGFloat?
         var enemyY:CGFloat?
         
-        var spawnChoose:Int = enemySpawn.nextInt()
+        let spawnChoose:Int = enemySpawn.nextInt()
 
         if spawnChoose == 0
         {
