@@ -18,13 +18,61 @@ class GameScene: SKScene {
     
     private var player : SKSpriteNode?
     private var enemy : SKSpriteNode?
+    private var walls : SKReferenceNode?
+    
+    let enemySpawn = GKRandomDistribution(forDieWithSideCount: 4)
+    
     
     override func sceneDidLoad() {
 
         //create the player
         self.player = self.childNode(withName: "//squareBoy") as? SKSpriteNode
         self.enemy = self.childNode(withName: "//roundie") as? SKSpriteNode
+        self.walls = self.childNode(withName: "//Walls") as? SKReferenceNode
         
+        var enemyX:CGFloat?
+        var enemyY:CGFloat?
+        
+        var spawnChoose:Int = enemySpawn.nextInt()
+
+        if spawnChoose == 0
+        {
+            enemyX = 50
+            enemyY = 50
+        }
+        
+        if spawnChoose == 1
+        {
+            enemyX = -500
+            enemyY = 100
+        }
+        
+        if spawnChoose == 2
+        {
+            enemyX = 864
+            enemyY = 256
+        }
+        
+        if spawnChoose == 3
+        {
+            enemyX = 150
+            enemyY = -500
+        }
+        
+        if spawnChoose == 4
+        {
+            enemyX = -500
+            enemyY = -500
+        }
+        
+        let spawnX = SKAction.moveTo(x: enemyX!, duration: 0)
+        let spawnY = SKAction.moveTo(y: enemyY!, duration: 0)
+        
+        let enemySpawnSeq = SKAction.sequence([spawnX, spawnY])
+        
+        enemy?.run(enemySpawnSeq)
+        
+    
         self.lastUpdateTime = 0
         
 
@@ -56,6 +104,18 @@ class GameScene: SKScene {
         
 
     }
+    
+
+    //enemy spawns
+
+    
+    @objc func enemySpawner()
+    {
+        
+
+    }
+    
+    
     
     var moving:Bool = false //bool to check if current player or enemy is moving
     var playerTurn:Bool = true //bool to check if it is players turn to move
