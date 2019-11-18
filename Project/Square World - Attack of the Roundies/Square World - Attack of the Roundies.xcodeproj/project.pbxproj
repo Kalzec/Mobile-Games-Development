@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0735E75923798AA200CF692F /* Wall1x2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0735E75823798AA200CF692F /* Wall1x2.sks */; };
 		0735E75B23798B2D00CF692F /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0735E75A23798B2D00CF692F /* Level1.sks */; };
-		0735E75E23798BAC00CF692F /* RefWall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0735E75D23798BAC00CF692F /* RefWall.sks */; };
 		07366AA323796D12002AAE6E /* Maze Outside Wall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 07366AA223796D12002AAE6E /* Maze Outside Wall.sks */; };
 		07D54202235DC26400597B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D54201235DC26400597B9A /* AppDelegate.swift */; };
 		07D54204235DC26400597B9A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 07D54203235DC26400597B9A /* GameScene.sks */; };
@@ -22,9 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0735E75823798AA200CF692F /* Wall1x2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Wall1x2.sks; sourceTree = "<group>"; };
 		0735E75A23798B2D00CF692F /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
-		0735E75D23798BAC00CF692F /* RefWall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RefWall.sks; sourceTree = "<group>"; };
 		07366AA223796D12002AAE6E /* Maze Outside Wall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Maze Outside Wall.sks"; sourceTree = "<group>"; };
 		07D541FE235DC26400597B9A /* Square World - Attack of the Roundies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square World - Attack of the Roundies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D54201235DC26400597B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +29,7 @@
 		07D54207235DC26400597B9A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		07D54209235DC26400597B9A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		07D5420C235DC26400597B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		07D5420E235DC26400597B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07D5420E235DC26400597B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/s17117612/Documents/GitHub/Mobile-Games-Development/Project/Square World - Attack of the Roundies/Square World - Attack of the Roundies/Assets.xcassets"; sourceTree = "<absolute>"; };
 		07D54211235DC26400597B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07D54213235DC26400597B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,9 +48,7 @@
 		0735E75C23798B5800CF692F /* Walls */ = {
 			isa = PBXGroup;
 			children = (
-				0735E75D23798BAC00CF692F /* RefWall.sks */,
 				07366AA223796D12002AAE6E /* Maze Outside Wall.sks */,
-				0735E75823798AA200CF692F /* Wall1x2.sks */,
 			);
 			path = Walls;
 			sourceTree = "<group>";
@@ -151,11 +145,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0735E75E23798BAC00CF692F /* RefWall.sks in Resources */,
 				07D5420D235DC26400597B9A /* Main.storyboard in Resources */,
 				07D54204235DC26400597B9A /* GameScene.sks in Resources */,
 				0735E75B23798B2D00CF692F /* Level1.sks in Resources */,
-				0735E75923798AA200CF692F /* Wall1x2.sks in Resources */,
 				07D5420F235DC26400597B9A /* Assets.xcassets in Resources */,
 				07D54212235DC26400597B9A /* LaunchScreen.storyboard in Resources */,
 				07366AA323796D12002AAE6E /* Maze Outside Wall.sks in Resources */,
