@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0735E75A23798B2D00CF692F /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
+		0735E75A23798B2D00CF692F /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = "/Users/s17117612/Documents/GitHub/Mobile-Games-Development/Project/Square World - Attack of the Roundies/Square World - Attack of the Roundies/Level1.sks"; sourceTree = "<absolute>"; };
 		07366AA223796D12002AAE6E /* Maze Outside Wall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Maze Outside Wall.sks"; sourceTree = "<group>"; };
 		07D541FE235DC26400597B9A /* Square World - Attack of the Roundies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square World - Attack of the Roundies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D54201235DC26400597B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
