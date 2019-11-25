@@ -8,63 +8,77 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
-class GameScene: SKScene {
+class GameScene: SKScene{
     
+    //create audio player
+    var audioPlayer = AVAudioPlayer()
+    
+    //test
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
+    //for update stuff
     private var lastUpdateTime : TimeInterval = 0
     
+    //variables to hold the player, enemy and the walls
     private var player : SKSpriteNode?
     private var enemy : SKSpriteNode?
     private var walls : SKReferenceNode?
     
+    //random numbers for spawning and moving the enemy
     let enemySpawn = GKRandomDistribution(forDieWithSideCount: 4)
-    
+    let enemyMove = GKRandomDistribution(forDieWithSideCount: 4)
     
     override func sceneDidLoad() {
-
+        //set bumping sound
+        let sound = Bundle.main.path(forResource: "bump", ofType:"wav")
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+        } catch {
+            //couldn't load file :(
+            print(error)
+        }
+        
         //create the player
         self.player = self.childNode(withName: "//squareBoy") as? SKSpriteNode
         self.enemy = self.childNode(withName: "//roundie") as? SKSpriteNode
         self.walls = self.childNode(withName: "//Walls") as? SKReferenceNode
         
+        //pathfinding 
+
+        //variables to hold enemy spawn position
         var enemyX:CGFloat?
         var enemyY:CGFloat?
         
+        //set chosen spawn from random enemySpawn variable
         let spawnChoose:Int = enemySpawn.nextInt()
 
-        if spawnChoose == 0
-        {
-            enemyX = 50
-            enemyY = 50
-        }
-        
+        //set spawn depensing on random number chosen
         if spawnChoose == 1
         {
-            enemyX = -500
-            enemyY = 100
+            enemyX = 864
+            enemyY = -444
         }
-        
         if spawnChoose == 2
         {
             enemyX = 864
             enemyY = 256
         }
-        
         if spawnChoose == 3
         {
-            enemyX = 150
-            enemyY = -500
+            enemyX = 608
+            enemyY = 64
         }
-        
         if spawnChoose == 4
         {
-            enemyX = -500
-            enemyY = -500
+            enemyX = 32
+            enemyY = 128
         }
         
+        //create the actions to move the enemy to spawn point
         let spawnX = SKAction.moveTo(x: enemyX!, duration: 0)
         let spawnY = SKAction.moveTo(y: enemyY!, duration: 0)
         
@@ -72,12 +86,10 @@ class GameScene: SKScene {
         
         enemy?.run(enemySpawnSeq)
         
-    
         self.lastUpdateTime = 0
-        
-
     }
     
+    //function to handle swipe gestures
     override func didMove(to view: SKView) {
         let swipeRight = UISwipeGestureRecognizer(target: self,
                                                   action: #selector(GameScene.swipeRight(sender:)))
@@ -101,30 +113,28 @@ class GameScene: SKScene {
         
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
-        
-
     }
     
 
-    //enemy spawns
-
-    
-    @objc func enemySpawner()
-    {
-        
-
-    }
-    
-    
-    
     var moving:Bool = false //bool to check if current player or enemy is moving
     var playerTurn:Bool = true //bool to check if it is players turn to move
     var moveTimer:Double = 15 //
     
+    //bools to check if tiles for enemy to move are clear
+    var rightClear:Bool = true
+    var upClear:Bool = true
+    var leftClear:Bool = true
+    var downClear:Bool = true
+    
+    var enemySpaceCheck:Bool = false //bool for checking enemy space
+    
+    //set actions for moving
     let right = SKAction.moveBy(x: 1920, y: 0, duration: 1)
     let left = SKAction.moveBy(x: -1920, y: 0, duration: 1)
     let up = SKAction.moveBy(x: 0, y: 1080, duration: 1)
     let down = SKAction.moveBy(x: 0, y: -1080, duration: 1)
+    
+    //Players turn - controlled by Swipe Gesturing
     
         //move right
         @objc func swipeRight (sender:UISwipeGestureRecognizer){
@@ -133,20 +143,10 @@ class GameScene: SKScene {
                     player?.run(right)
                     moving = true
                     playerTurn = false
+                    enemySpaceCheck = true
                     
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
-                }
-            }
-            
-            if playerTurn == false{
-                if moving == false{
-                    enemy?.run(right)
-                    moving = true
-                    playerTurn = true
-                    
-                    player?.physicsBody?.isDynamic = false
-                    enemy?.physicsBody?.isDynamic = true
                 }
             }
         }
@@ -157,20 +157,10 @@ class GameScene: SKScene {
                     player?.run(left)
                     moving = true
                     playerTurn = false
+                    enemySpaceCheck = true
 
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
-                }
-            }
-            
-            if playerTurn == false{
-                if moving == false{
-                    enemy?.run(left)
-                    moving = true
-                    playerTurn = true
-                    
-                    player?.physicsBody?.isDynamic = false
-                    enemy?.physicsBody?.isDynamic = true
                 }
             }
         }
@@ -181,20 +171,10 @@ class GameScene: SKScene {
                     player?.run(up)
                     moving = true
                     playerTurn = false
+                    enemySpaceCheck = true
                     
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
-                }
-            }
-            
-            if playerTurn == false{
-                if moving == false{
-                    enemy?.run(up)
-                    moving = true
-                    playerTurn = true
-                    
-                    player?.physicsBody?.isDynamic = false
-                    enemy?.physicsBody?.isDynamic = true
                 }
             }
         }
@@ -205,26 +185,13 @@ class GameScene: SKScene {
                     player?.run(down)
                     moving = true
                     playerTurn = false
+                    enemySpaceCheck = true
                     
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
                 }
             }
-            
-            if playerTurn == false{
-                if moving == false{
-                    enemy?.run(down)
-                    moving = true
-                    playerTurn = true
-                    
-                    player?.physicsBody?.isDynamic = false
-                    enemy?.physicsBody?.isDynamic = true
-                }
-            }
         }
-
-    
-
     
     func touchDown(atPoint pos : CGPoint) {
 
@@ -256,14 +223,75 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
         //set timer to move again, temporary
         if moving{
             moveTimer -= 0.4
             if moveTimer <= 0{
                 moving = false
                 moveTimer = 50
+            }
+        }
+        
+        //enemy turn
+
+        if enemySpaceCheck
+        {
+            //Convert enemy x and y positions to Ints
+            var enemyX = Int(enemy!.position.x)
+            var enemyY = Int(enemy!.position.y)
+        
+            //Convert Walls x and y position to Ints
+            let wallsX = Int(walls!.position.x)
+            let wallsY = Int(walls!.position.y)
+            
+        }
+        
+        //checking if tiles are clear
+
+        
+        if playerTurn == false
+        {
+            if moving == false{
+                let moveChoose:Int = enemyMove.nextInt()
+                
+                if moveChoose == 1
+                {
+                    if rightClear == true
+                    {
+                        enemy?.run(right)
+                        enemySpaceCheck = false
+                    }
+                }
+                if moveChoose == 2
+                {
+                    if upClear == true
+                    {
+                        enemy?.run(up)
+                        enemySpaceCheck = false
+                    }
+                }
+                if moveChoose == 3
+                {
+                    if leftClear == true
+                    {
+                        enemy?.run(left)
+                        enemySpaceCheck = false
+                    }
+                }
+                if moveChoose == 4
+                {
+                    if downClear == true
+                    {
+                        enemy?.run(down)
+                        enemySpaceCheck = false
+                    }
+                }
+                
+                moving = true
+                playerTurn = true
+                
+                //player?.physicsBody?.isDynamic = false
+                enemy?.physicsBody?.isDynamic = true
             }
         }
         
