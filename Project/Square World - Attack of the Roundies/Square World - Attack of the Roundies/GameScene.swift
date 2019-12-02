@@ -9,8 +9,31 @@
 import SpriteKit
 import GameplayKit
 import AVFoundation
+import UIKit
 
-class GameScene: SKScene{
+class GameScene: SKScene, SKPhysicsContactDelegate{
+    
+    //Ui
+    lazy var healthLabel: SKLabelNode = {
+        let label = SKLabelNode(fontNamed: "Marker Felt")
+        label.text = "100"
+        label.fontSize = 96
+        label.fontColor = .yellow
+        label.position = CGPoint(x: -480, y: 373)
+        return label
+    }()
+    
+    lazy var moveLabel: SKLabelNode = {
+        let label = SKLabelNode(fontNamed: "Marker Felt")
+        label.text = "10"
+        label.fontSize = 96
+        label.fontColor = .yellow
+        label.position = CGPoint(x: 210, y: 373)
+        return label
+    }()
+
+    var Moves:Int = 10
+    var Health:Int = 100
     
     //create audio player
     var audioPlayer = AVAudioPlayer()
@@ -31,7 +54,13 @@ class GameScene: SKScene{
     let enemySpawn = GKRandomDistribution(forDieWithSideCount: 4)
     let enemyMove = GKRandomDistribution(forDieWithSideCount: 4)
     
+
     override func sceneDidLoad() {
+        //create the UI
+        addChild(healthLabel)
+        addChild(moveLabel)
+    
+        
         //set bumping sound
         let sound = Bundle.main.path(forResource: "bump", ofType:"wav")
         
@@ -91,6 +120,8 @@ class GameScene: SKScene{
     
     //function to handle swipe gestures
     override func didMove(to view: SKView) {
+        
+   
         let swipeRight = UISwipeGestureRecognizer(target: self,
                                                   action: #selector(GameScene.swipeRight(sender:)))
         swipeRight.direction = .right
@@ -115,7 +146,105 @@ class GameScene: SKScene{
         physicsWorld.contactDelegate = self
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstObject = String(describing: contact.bodyA.node!.name!)
+        var secondObject = String(describing:contact.bodyB.node!.name!)
+        //print("Contact Detected between: \(firstObject) and \(secondObject)")
+        
+        if firstObject == "roundie" && secondObject == "squareBoy"
+        {
+            if playerTurn == false
+            {
+                print ("player hit enemy, move enemy to random place")
+                //variables to hold enemy spawn position
+                var enemyX:CGFloat?
+                var enemyY:CGFloat?
+                
+                //set chosen spawn from random enemySpawn variable
+                let spawnChoose:Int = enemySpawn.nextInt()
+                
+                //set spawn depensing on random number chosen
+                if spawnChoose == 1
+                {
+                    enemyX = 864
+                    enemyY = -444
+                }
+                if spawnChoose == 2
+                {
+                    enemyX = 864
+                    enemyY = 256
+                }
+                if spawnChoose == 3
+                {
+                    enemyX = 608
+                    enemyY = 64
+                }
+                if spawnChoose == 4
+                {
+                    enemyX = 32
+                    enemyY = 128
+                }
+                
+                //create the actions to move the enemy to spawn point
+                let spawnX = SKAction.moveTo(x: enemyX!, duration: 0)
+                let spawnY = SKAction.moveTo(y: enemyY!, duration: 0)
+                
+                let enemySpawnSeq = SKAction.sequence([spawnX, spawnY])
+                
+                enemy?.run(enemySpawnSeq)
+                
+            }
+            if playerTurn == true
+            {
+                print ("enemy hit player, move player to random place and lower health")
+                Health -= 10
+                
+                let healthString = String(Health)
+                healthLabel.text = healthString
+                
+                //variables to hold enemy spawn position
+                var playerX:CGFloat?
+                var playerY:CGFloat?
+                
+                //set chosen spawn from random enemySpawn variable
+                let spawnChoose:Int = enemySpawn.nextInt()
+                
+                //set spawn depensing on random number chosen
+                if spawnChoose == 1
+                {
+                    playerX = 864
+                    playerY = -444
+                }
+                if spawnChoose == 2
+                {
+                    playerX = 864
+                    playerY = 256
+                }
+                if spawnChoose == 3
+                {
+                    playerX = 608
+                    playerY = 64
+                }
+                if spawnChoose == 4
+                {
+                    playerX = 32
+                    playerY = 128
+                }
+                
+                //create the actions to move the enemy to spawn point
+                let spawnX = SKAction.moveTo(x: playerX!, duration: 0)
+                let spawnY = SKAction.moveTo(y: playerY!, duration: 0)
+                
+                let playerSpawnSeq = SKAction.sequence([spawnX, spawnY])
+                
+                player?.run(playerSpawnSeq)
 
+            }
+        }
+    }
+    
+
+    
     var moving:Bool = false //bool to check if current player or enemy is moving
     var playerTurn:Bool = true //bool to check if it is players turn to move
     var moveTimer:Double = 15 //
@@ -147,6 +276,10 @@ class GameScene: SKScene{
                     
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
+                    
+                    Moves -= 1
+                    let moveString = String(Moves)
+                    moveLabel.text = moveString
                 }
             }
         }
@@ -161,6 +294,10 @@ class GameScene: SKScene{
 
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
+                    
+                    Moves -= 1
+                    let moveString = String(Moves)
+                    moveLabel.text = moveString
                 }
             }
         }
@@ -175,6 +312,10 @@ class GameScene: SKScene{
                     
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
+                    
+                    Moves -= 1
+                    let moveString = String(Moves)
+                    moveLabel.text = moveString
                 }
             }
         }
@@ -189,6 +330,10 @@ class GameScene: SKScene{
                     
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
+                    
+                    Moves -= 1
+                    let moveString = String(Moves)
+                    moveLabel.text = moveString
                 }
             }
         }
@@ -312,7 +457,4 @@ class GameScene: SKScene{
     }
 }
 
-extension GameScene: SKPhysicsContactDelegate {
-    
-}
 

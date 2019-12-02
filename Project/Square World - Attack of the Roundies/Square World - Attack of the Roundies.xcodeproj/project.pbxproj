@@ -22,9 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0735E75A23798B2D00CF692F /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = "/Users/s17117612/Desktop/Mobile-Games-Development/Project/Square World - Attack of the Roundies/Square World - Attack of the Roundies/Level1.sks"; sourceTree = "<absolute>"; };
+		0735E75A23798B2D00CF692F /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = "/Users/s17117612/Documents/GitHub/Mobile-Games-Development/Project/Square World - Attack of the Roundies/Square World - Attack of the Roundies/Level1.sks"; sourceTree = "<absolute>"; };
 		07366AA223796D12002AAE6E /* Maze Outside Wall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Maze Outside Wall.sks"; sourceTree = "<group>"; };
-		07CD9289238BF7AF006CED53 /* bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bump.wav; path = ../../../../sounds/bump.wav; sourceTree = "<group>"; };
+		07CD9289238BF7AF006CED53 /* bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bump.wav; path = ../../../sounds/bump.wav; sourceTree = "<group>"; };
 		07CD928C238BF89C006CED53 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		07D541FE235DC26400597B9A /* Square World - Attack of the Roundies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square World - Attack of the Roundies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D54201235DC26400597B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +33,7 @@
 		07D54207235DC26400597B9A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		07D54209235DC26400597B9A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		07D5420C235DC26400597B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		07D5420E235DC26400597B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/s17117612/Desktop/Mobile-Games-Development/Project/Square World - Attack of the Roundies/Square World - Attack of the Roundies/Assets.xcassets"; sourceTree = "<absolute>"; };
+		07D5420E235DC26400597B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07D54211235DC26400597B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07D54213235DC26400597B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +63,7 @@
 			children = (
 				07CD9289238BF7AF006CED53 /* bump.wav */,
 			);
-			path = Sounds;
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 		07CD928B238BF89C006CED53 /* Frameworks */ = {
