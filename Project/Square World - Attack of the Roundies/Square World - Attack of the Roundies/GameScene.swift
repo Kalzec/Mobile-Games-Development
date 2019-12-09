@@ -13,6 +13,8 @@ import UIKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
     
+    let defaults = UserDefaults.standard
+    
     //Ui
     lazy var healthLabel: SKLabelNode = {
         let label = SKLabelNode(fontNamed: "Marker Felt")
@@ -31,14 +33,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         label.position = CGPoint(x: 210, y: 373)
         return label
     }()
+    
+    lazy var levelLabel: SKLabelNode = {
+        let label = SKLabelNode(fontNamed: "Marker Felt")
+        label.text = "1"
+        label.fontSize = 96
+        label.fontColor = .yellow
+        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        label.position = CGPoint(x: 770, y: 373)
+        return label
+    }()
 
+
+
+    
     var Moves:Int = 10
     var Health:Int = 100
+    var Level:Int = UserDefaults.standard.integer(forKey: "Level")
     
+
     //create audio player
     var audioPlayer = AVAudioPlayer()
     
-    //test
+    //tests
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
@@ -56,10 +73,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
 
     override func sceneDidLoad() {
+        
         //create the UI
         addChild(healthLabel)
         addChild(moveLabel)
+        addChild(levelLabel)
     
+        let levelString = String(defaults.integer(forKey: "Level"))
+        levelLabel.text = levelString
         
         //set bumping sound
         let sound = Bundle.main.path(forResource: "bump", ofType:"wav")
@@ -160,28 +181,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 var enemyX:CGFloat?
                 var enemyY:CGFloat?
                 
+                //increase level by 1 every time enemy is hit
+                Level += 1
+                defaults.set(Level, forKey: "Level")
+                let levelString = String(defaults.integer(forKey: "Level"))
+                levelLabel.text = levelString
+                
                 //set chosen spawn from random enemySpawn variable
                 let spawnChoose:Int = enemySpawn.nextInt()
                 
                 //set spawn depensing on random number chosen
                 if spawnChoose == 1
                 {
-                    enemyX = 864
-                    enemyY = -444
+                    enemyX = 489
+                    enemyY = 260
                 }
                 if spawnChoose == 2
                 {
-                    enemyX = 864
-                    enemyY = 256
+                    enemyX = -544
+                    enemyY = -64
                 }
                 if spawnChoose == 3
                 {
-                    enemyX = 608
-                    enemyY = 64
+                    enemyX = 224
+                    enemyY = 252
                 }
                 if spawnChoose == 4
                 {
-                    enemyX = 32
+                    enemyX = 288
                     enemyY = 128
                 }
                 
@@ -212,22 +239,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 //set spawn depensing on random number chosen
                 if spawnChoose == 1
                 {
-                    playerX = 864
-                    playerY = -444
+                    playerX = 489
+                    playerY = 260
                 }
                 if spawnChoose == 2
                 {
-                    playerX = 864
-                    playerY = 256
+                    playerX = -544
+                    playerY = -64
                 }
                 if spawnChoose == 3
                 {
-                    playerX = 608
-                    playerY = 64
+                    playerX = 224
+                    playerY = 252
                 }
                 if spawnChoose == 4
                 {
-                    playerX = 32
+                    playerX = 288
                     playerY = 128
                 }
                 
