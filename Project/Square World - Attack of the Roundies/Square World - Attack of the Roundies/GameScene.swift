@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     lazy var moveLabel: SKLabelNode = {
         let label = SKLabelNode(fontNamed: "Marker Felt")
-        label.text = "10"
+        label.text = "0"
         label.fontSize = 96
         label.fontColor = .yellow
         label.position = CGPoint(x: 210, y: 373)
@@ -47,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
 
     
-    var Moves:Int = 10
+    var Moves:Int = 0
     var Health:Int = 100
     var Level:Int = UserDefaults.standard.integer(forKey: "Level")
     
@@ -74,6 +74,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
     override func sceneDidLoad() {
         
+        //audioPlayer.play()
+        
         //create the UI
         addChild(healthLabel)
         addChild(moveLabel)
@@ -83,7 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         levelLabel.text = levelString
         
         //set bumping sound
-        let sound = Bundle.main.path(forResource: "bump", ofType:"wav")
+        let sound = Bundle.main.path(forResource: "Fantasia Fantasia", ofType:"mp3")
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
@@ -176,6 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         {
             if playerTurn == false
             {
+                
                 print ("player hit enemy, move enemy to random place")
                 //variables to hold enemy spawn position
                 var enemyX:CGFloat?
@@ -304,7 +307,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
                     
-                    Moves -= 1
+                    Moves += 1
                     let moveString = String(Moves)
                     moveLabel.text = moveString
                 }
@@ -322,7 +325,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
                     
-                    Moves -= 1
+                    Moves += 1
                     let moveString = String(Moves)
                     moveLabel.text = moveString
                 }
@@ -340,7 +343,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
                     
-                    Moves -= 1
+                    Moves += 1
                     let moveString = String(Moves)
                     moveLabel.text = moveString
                 }
@@ -358,7 +361,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     player?.physicsBody?.isDynamic = true
                     enemy?.physicsBody?.isDynamic = false
                     
-                    Moves -= 1
+                    Moves += 1
                     let moveString = String(Moves)
                     moveLabel.text = moveString
                 }
@@ -395,6 +398,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func update(_ currentTime: TimeInterval) {
+        
+        
+        
         //set timer to move again, temporary
         if moving{
             moveTimer -= 0.4
